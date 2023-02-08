@@ -46,6 +46,7 @@ RUN sed -i 's/\${atlas.log.dir}/\/opt\/apache-atlas\/logs/g' atlas-log4j.xml \
 
 WORKDIR /opt/apache-atlas/bin
 RUN ./atlas_start.py -setup || true
+RUN rm /opt/apache-atlas/server/webapp/atlas/WEB-INF/lib/log4j-1.2.17.jar
 RUN ./atlas_start.py & \
     touch /opt/apache-atlas/logs/application.log \
     && tail -f /opt/apache-atlas/logs/application.log | sed '/Defaulting to local host name/ q' \
